@@ -15,6 +15,10 @@
     <h1>{{name}}---{{age}}</h1>
   </div>
   <script>
+// 1.实现一级深拷贝，可以用扩展运算符(...),object.assign()等方法
+// 2.如果是纯的JSON数据，并且不包含循环引用，可以用JSON.parse(JSON.stringify())实现多级深拷贝
+// 3.可以用递归实现没有限制的多级深拷贝
+
 
     Vue.mixin({
       data() {
