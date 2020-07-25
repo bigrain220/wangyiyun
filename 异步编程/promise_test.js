@@ -3,6 +3,19 @@
 // 2.Promise里面要有resolve()，才能用then进行下一步，如果要传值，则resolve(value)
 // 3.then里面要写函数才有效果，而且如果要传值的话则需要 return value
 
+// 注意点：
+// 1.then,catch返回的promise是新的promise,不是原来的promise
+// 2.Promise对象的错误会冒泡,直到捕获为止,错误会被下一个catch语句捕获。所以只要在最后加一个catch语句就可以了
+
+// promise A+规范状态：(一个promise的状态一旦改变就不能再改变了)
+// promise有三种状态：pending,fulfilled,reject。
+// pending带上value值可以转为fulfilled状态；
+// pending带上reason可以转为reject状态；
+
+
+
+
+
 // 片段1
 const promise = new Promise((resolve, reject) => {
     console.log(1);
