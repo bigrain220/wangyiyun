@@ -16,19 +16,30 @@ Promise.resolve({
 //考查点：resolve 一个规范的thenable的情况
 
 Promise.resolve({
-    then:function(fullfill){
-        fullfill('a');    //把promise的状态改为resolved，传值为'a'
-        console.log('b'); 
+    then: function (fullfill) {
+        fullfill('a'); //把promise的状态改为resolved，传值为'a'
+        console.log('b');
         throw new Error('c'); //不会执行，因为promise的状态只能改变一次，这个会改变promise的状态，所以不会在执行
         console.log('d');
     }
 }).then(
-    (d)=>{
+    (d) => {
         console.log(d);
     },
-    (err)=>{
+    (err) => {
         console.log(err.message)
     }
 );
 
 //打印出 b a
+
+//代码三
+//考查点：promise在resolve语句后抛出错误是否能被捕获
+new Promise((resolve, reject) => {
+    resolve('a');
+    console.log(666); //promise里面的代码是同步的，then里面才是异步的，所以666会首先打印；
+    throw new Error('b'); //不会执行，因为promise的状态只能改变一次，这个会改变promise的状态，所以不会在执行
+    console.log(777); //Error后面写的代码也不会执行
+}).then(console.log).catch(console.log)
+
+//打印出 666 a
