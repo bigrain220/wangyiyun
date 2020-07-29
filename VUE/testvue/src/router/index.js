@@ -1,29 +1,43 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Home from '../views/Home.vue'
+
 
 Vue.use(VueRouter)
 
-  const routes = [
-  {
+const routes = [{
     path: '/',
-    name: 'Home',
-    component: Home
+    redirect: '/admin/index',
   },
   {
-    path: '/about',
-    name: 'About',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
+    path: '/admin',
+    component: resolve => require(['@/pages/home'], resolve),
+    children: [{
+      path: 'index',
+      name: 'indexPage',
+      component: () => import('@/views/indexPage.vue'),
+    }]
   },
   {
-    path: '/slotPage',
-    name: 'slotPage',
-    component: () => import(/* webpackChunkName: "about" */ '../views/slotPage.vue')
+    path: '/learning',
+    component: resolve => require(['@/pages/home'], resolve),
+    children: [{
+        path: 'slotPage',
+        name: 'slotPage',
+        component: () => import('@/views/slotPage.vue')
+      },
+      {
+        path: 'directivesPage',
+        name: 'directivesPage',
+        component: () => import('@/views/directivesPage.vue')
+      },
+    ]
   }
 ]
+//解决重复点击路由报警告的问题
+const originalPush = VueRouter.prototype.push
+VueRouter.prototype.push = function push(location) {
+  return originalPush.call(this, location).catch(err => err)
+}
 
 const router = new VueRouter({
   routes
