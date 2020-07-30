@@ -15,6 +15,10 @@ const routes = [{
       path: 'index',
       name: 'indexPage',
       component: () => import('@/views/indexPage.vue'),
+    },{
+      path: 'tablePage',
+      name: 'tablePage',
+      component: () => import('@/views/tablePage.vue'),
     }]
   },
   {
@@ -30,8 +34,13 @@ const routes = [{
         name: 'directivesPage',
         component: () => import('@/views/directivesPage.vue')
       },
+      {
+        path: 'mixinPage',
+        name: 'mixinPage',
+        component: () => import('@/views/mixinPage.vue')
+      },
     ]
-  }
+  },
 ]
 //解决重复点击路由报警告的问题
 const originalPush = VueRouter.prototype.push

@@ -1,5 +1,5 @@
 <template>
-  <el-dialog :title="config.title.name" :visible.sync="isShow" :before-close="closeDialog" :custom-class="['self-dialog',config.className]" width="60%">
+  <el-dialog :title="config.title.name" :visible.sync="isShow" :before-close="closeDialog" :custom-class="config.className" class="self-dialog" width="60%">
     <el-form size="small" label-width="100px" label-suffix=":" class="self-form" :model="allData" ref="dialogForm">
       <el-row>
         <el-col :xs="24" :sm="24" :md="12" :lg="12" :xl="12" v-for="(item,index) in config.data" :key="index">
@@ -86,8 +86,10 @@ export default {
 }
 @media screen and (max-width: 992px) {
   .self-dialog {
+    .el-dialog{
     width: 98% !important;
     margin: 0 auto;
+    }
   }
 }
 </style>

@@ -40,24 +40,28 @@ export default {
           title: "首页"
         },
         {
-          icon: "el-icon-setting",
+          icon: "el-icon-document-copy",
           index: "config",
           title: "知识点",
           subs: [
             {
               index: "/learning/slotPage",
-              title: "slot"
+              title: "插槽slot"
             },
             {
               index: "/learning/directivesPage",
               title: "自定义指令"
             },
+             {
+              index: "/learning/mixinPage",
+              title: "插件mixin"
+            },
           ]
         },
         {
-          icon: "el-icon-shopping-cart-full",
-          index: "/admin/trade",
-          title: "收支明细"
+          icon: "el-icon-date",
+          index: "/admin/tablePage",
+          title: "表格模板"
         }
       ]
     };
