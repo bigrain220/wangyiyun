@@ -17,7 +17,7 @@
       <div>* 在图片资源还没加载出来时，先显示默认背景图，当图片资源真正加载出来了之后，再把真实图片放置到对应的位置上并显示出来。</div>
       <div class="img-box">
         <div v-for="(item,index) in imageList" :key="index" class="img-box">
-          <img src="../assets/logo.png" alt="默认图" v-image="item.url">
+          <img src="../../assets/logo.png" alt="默认图" v-image="item.url">
         </div>
       </div>
     </div>

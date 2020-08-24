@@ -1,4 +1,4 @@
-# testvue
+# vue-learning-system
 
 ## Project setup
 ```

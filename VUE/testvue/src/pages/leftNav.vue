@@ -1,6 +1,6 @@
 <template>
   <div id="sidebar">
-    <el-menu class="sidebar-el-menu" router :defaultOpeneds="['config']" :default-active="onRoutes" :collapse="isCollapse" background-color="#fff" text-color="#434444" active-text-color="#29e">
+    <el-menu class="sidebar-el-menu" router :defaultOpeneds="['one','two']" :default-active="onRoutes" :collapse="isCollapse" background-color="#fff" text-color="#434444" active-text-color="#29e">
       <template v-for="item in items">
         <template v-if="item.subs">
           <el-submenu :index="item.index" :key="item.index">
@@ -41,27 +41,33 @@ export default {
         },
         {
           icon: "el-icon-document-copy",
-          index: "config",
+          index: "one",
           title: "知识点",
           subs: [
             {
-              index: "/learning/slotPage",
+              index: "/knowledge/slotPage",
               title: "插槽slot"
             },
             {
-              index: "/learning/directivesPage",
+              index: "/knowledge/directivesPage",
               title: "自定义指令"
             },
-             {
-              index: "/learning/mixinPage",
+            {
+              index: "/knowledge/mixinPage",
               title: "插件mixin"
             },
           ]
         },
         {
-          icon: "el-icon-date",
-          index: "/admin/tablePage",
-          title: "表格模板"
+          icon: "el-icon-document-copy",
+          index: "two",
+          title: "表格相关",
+          subs: [
+            {
+              index: "/tableview/tablePage",
+              title: "表格模板"
+            },
+          ]
         }
       ]
     };

@@ -15,32 +15,38 @@ const routes = [{
       path: 'index',
       name: 'indexPage',
       component: () => import('@/views/indexPage.vue'),
-    },{
-      path: 'tablePage',
-      name: 'tablePage',
-      component: () => import('@/views/tablePage.vue'),
-    }]
+    }, ]
   },
   {
-    path: '/learning',
+    path: '/knowledge',
     component: resolve => require(['@/pages/home'], resolve),
     children: [{
         path: 'slotPage',
         name: 'slotPage',
-        component: () => import('@/views/slotPage.vue')
+        component: () => import('@/views/knowledge/slotPage.vue')
       },
       {
         path: 'directivesPage',
         name: 'directivesPage',
-        component: () => import('@/views/directivesPage.vue')
+        component: () => import('@/views/knowledge/directivesPage.vue')
       },
       {
         path: 'mixinPage',
         name: 'mixinPage',
-        component: () => import('@/views/mixinPage.vue')
+        component: () => import('@/views/knowledge/mixinPage.vue')
       },
     ]
   },
+  {
+    path: '/tableview',
+    component: resolve => require(['@/pages/home'], resolve),
+    children: [{
+      path: 'tablePage',
+      name: 'tablePage',
+      component: () => import('@/views/tableview/tablePage.vue'),
+    }]
+
+  }
 ]
 //解决重复点击路由报警告的问题
 const originalPush = VueRouter.prototype.push
