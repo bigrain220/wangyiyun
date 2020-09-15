@@ -46,7 +46,7 @@ export default {
           subs: [
             {
               index: "/knowledge/slotPage",
-              title: "插槽slot"
+              title: "slot插槽"
             },
             {
               index: "/knowledge/directivesPage",
@@ -54,7 +54,11 @@ export default {
             },
             {
               index: "/knowledge/mixinPage",
-              title: "插件mixin"
+              title: "mixin插件"
+            },
+             {
+              index: "/knowledge/vueRouter",
+              title: "vue路由"
             },
           ]
         },

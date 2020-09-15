@@ -35,6 +35,11 @@ const routes = [{
         name: 'mixinPage',
         component: () => import('@/views/knowledge/mixinPage.vue')
       },
+      {
+        path: 'vueRouter',
+        name: 'vueRouter',
+        component: () => import('@/views/knowledge/vueRouter.vue')
+      },
     ]
   },
   {

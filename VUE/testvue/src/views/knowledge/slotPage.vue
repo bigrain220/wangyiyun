@@ -11,9 +11,9 @@
         <!-- 111 -->
       </template>
       <!-- slot传值 -->
-      <template v-slot:getprops="slotProps">
+      <!-- <template v-slot:getprops="slotProps">
         <div>{{slotProps.user.lastName}}</div>
-      </template>
+      </template> -->
       <!-- 结构赋值 多个同名slot时(比如这里两个getprops),只有最后一个有效果-->
       <template v-slot:getprops="{user}">
         <div>{{user.firstName}}</div>
