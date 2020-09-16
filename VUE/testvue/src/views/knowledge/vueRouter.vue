@@ -32,6 +32,54 @@
         <li>this.$router.go(n) </li>
       </ol>
     </el-card>
+    <el-card class="fn-card card">
+      <h3 class="card-title">编程式的导航：</h3>
+      <ol class="li-box">
+        <el-row :gutter="40">
+          <el-col :lg="12" :span="24">
+            <li>
+              <h4>push</h4>
+              <img src="../../assets/images/router_push.png" alt="" style="width:100%;height:auto;">
+            </li>
+          </el-col>
+          <el-col :lg="12" :span="24">
+            <li>
+              <h4>replace</h4>
+              <img src="../../assets/images/router_replace.jpg" alt="" style="width:100%;height:auto;">
+            </li>
+          </el-col>
+          <el-col :lg="12" :span="24">
+            <li>
+              <h4>go</h4>
+              <img src="../../assets/images/router_go.jpg" alt="" style="width:100%;height:auto;">
+            </li>
+          </el-col>
+        </el-row>
+      </ol>
+    </el-card>
+    <el-card class="query-card card">
+      <h3 class="card-title">路由传参：</h3>
+      <ol class="li-box">
+        <ol>
+          <el-row>
+            <el-col :span="20">
+              <li>
+                <h4>声明式的导航</h4>
+                <img src="../../assets/images/router_link_query.jpg" alt="" style="width:100%;height:auto;">
+              </li>
+            </el-col>
+            <el-col :span="20">
+              <li>
+                <h4>编程式的导航</h4>
+                <img src="../../assets/images/router_name_query.jpg" alt="" style="width:100%;height:auto;margin:30px 0;">
+                <img src="../../assets/images/router_path_query.jpg" alt="" style="width:100%;height:auto;">
+              </li>
+            </el-col>
+          </el-row>
+        </ol>
+      </ol>
+    </el-card>
+
   </div>
 </template>
 
@@ -58,11 +106,11 @@ export default {
     li {
       line-height: 24px;
     }
-    .li-box{
-         padding-left: 20px; 
+    .li-box {
+      padding-left: 20px;
     }
-    .card-title{
-         margin-bottom: 20px;
+    .card-title {
+      margin-bottom: 20px;
     }
   }
   .card:nth-child(1) {
