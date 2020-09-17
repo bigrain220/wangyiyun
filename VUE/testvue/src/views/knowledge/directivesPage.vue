@@ -9,9 +9,9 @@
       <el-button type="primary" v-display-key="{ key: '1' }">1</el-button>
       <el-button type="primary" v-display-key="{ key: '11' }">11</el-button>
     </div>
-     <div class="item">
-        <!-- 如果为direction为height，则显示高，否则显示宽。加上quiet修饰符则首次加载时不触发。(这是传函数的例子)-->
-        <div v-resize:[direction].quiet="onResize">* 动态指令参数：window {{direction}} is： {{ length }}</div>
+    <div class="item">
+      <!-- 如果为direction为height，则显示高，否则显示宽。加上quiet修饰符则首次加载时不触发。(这是传函数的例子)-->
+      <div v-resize:[direction].quiet="onResize">* 动态指令参数：window {{direction}} is： {{ length }}</div>
     </div>
     <div class="item">
       <div>* 在图片资源还没加载出来时，先显示默认背景图，当图片资源真正加载出来了之后，再把真实图片放置到对应的位置上并显示出来。</div>
@@ -98,6 +98,8 @@ export default {
   },
   created() {
     that = this;
+    //展示路由信息
+    console.log('route', this.$route)
   },
 }
 </script>

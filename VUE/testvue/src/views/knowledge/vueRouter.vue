@@ -24,16 +24,37 @@
       <div>在router的js文件中把组件映射到路由，然后在main.js中引入，并且挂载到new Vue里面</div>
     </el-card>
     <el-card class="using-card card">
-      <h3 class="card-title">路由跳转的方式：</h3>
-      <ol class="li-box">
-        <li> router-link</li>
-        <li> this.$router.push() </li>
-        <li> this.$router.replace() </li>
-        <li>this.$router.go(n) </li>
-      </ol>
+      <h3 class="card-title">路由跳转的方式： <span style="font-size:12px;">(query和path一起用，查询参数会拼接在url上。params和name一起用，不会拼接在url上。有path会忽略params)</span></h3>
+      <el-collapse v-model="activeNames">
+        <el-collapse-item title="router-link" name="1">
+          <router-link to="./directivesPage">不带参数跳转</router-link>&nbsp;&nbsp;&nbsp;&nbsp;
+          <router-link :to="{name:'directivesPage',params:{userId:666}}">携带params参数跳转</router-link>&nbsp;&nbsp;&nbsp;&nbsp;
+          <router-link :to="{path:'./directivesPage',query:{userId:666}}">携带query参数跳转</router-link>
+        </el-collapse-item>
+        <el-collapse-item title="this.$router.push()" name="2">
+          <el-row>
+            不传参数：
+            <el-button type="text" @click="pushClick('one')">push+'路径'</el-button>
+            <el-button type="text" @click="pushClick('two')">push+'name'</el-button>
+            <el-button type="text" @click="pushClick('three')">push+路径对象</el-button>
+          </el-row>
+          <el-row>
+            传参数：
+            <el-button type="text" @click="pushClick('four')">携带params参数跳转</el-button>
+            <el-button type="text" @click="pushClick('five')">携带query参数跳转</el-button>
+          </el-row>
+        </el-collapse-item>
+        <el-collapse-item title="router-replace" name="3">
+          <el-button type="text" @click="pushClick('six')">repalce跳转,浏览器点击返回时不是返回到当前页，而是当前页的上一个浏览页面</el-button>
+        </el-collapse-item>
+        <el-collapse-item title="router-go" name="4">
+          <el-button type="text" @click="pushClick('seven')">go跳转</el-button>
+        </el-collapse-item>
+      </el-collapse>
     </el-card>
     <el-card class="fn-card card">
-      <h3 class="card-title">编程式的导航：</h3>
+      <h3 class="card-title">编程式的导航：<el-link href="https://router.vuejs.org/zh/guide/essentials/navigation.html" target="_blank">(查看官网文档)</el-link>
+      </h3>
       <ol class="li-box">
         <el-row :gutter="40">
           <el-col :lg="12" :span="24">
@@ -84,16 +105,41 @@
 </template>
 
 <script>
-
 export default {
   name: "vueRouter",
   data() {
     return {
-
+      activeNames: []
     }
   },
   methods: {
-
+    pushClick(params) {
+      var _this = this;
+      let obj = {
+        one() {
+          _this.$router.push('/knowledge/directivesPage');
+        },
+        two() {
+          _this.$router.push('directivesPage');
+        },
+        three() {
+          _this.$router.push({ path: 'home' });
+        },
+        four() {
+          _this.$router.push({ name: 'directivesPage', params: { userId: 666 } });
+        },
+        five() {
+          _this.$router.push({ path: './directivesPage', query: { userId: 666 } });
+        },
+        six() {
+          _this.$router.replace({ path: './directivesPage' });
+        },
+        seven() {
+          _this.$router.go(-1);
+        }
+      };
+      obj[params]();
+    }
   }
 }
 </script>
