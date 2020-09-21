@@ -50,7 +50,7 @@ export default {
             },
             {
               index: "/knowledge/directivesPage",
-              title: "自定义指令"
+              title: "directives指令"
             },
             {
               index: "/knowledge/mixinPage",
