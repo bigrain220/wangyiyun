@@ -36,6 +36,11 @@ const routes = [{
         component: () => import('@/views/knowledge/mixinPage.vue')
       },
       {
+        path: 'filterPage',
+        name: 'filterPage',
+        component: () => import('@/views/knowledge/filterPage.vue')
+      },
+      {
         path: 'vueRouter',
         name: 'vueRouter',
         component: () => import('@/views/knowledge/vueRouter.vue')

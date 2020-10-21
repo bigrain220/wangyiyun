@@ -5,6 +5,9 @@ import store from '@/store'
 import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
 import {MyPlugin} from "@/mixins/notify"
+import  '@/directives'; 
+import  '@/filters';
+
 
 Vue.config.productionTip = false;
 // 通过全局方法 Vue.use() 使用插件。它需要在你调用 new Vue() 启动应用之前完成：

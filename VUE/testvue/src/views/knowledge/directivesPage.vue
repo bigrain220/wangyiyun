@@ -26,7 +26,6 @@
 
 <script>
 let that;
-import '@/directives'
 export default {
   name: 'directivesPage',
   components: {

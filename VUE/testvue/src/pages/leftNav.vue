@@ -56,7 +56,11 @@ export default {
               index: "/knowledge/mixinPage",
               title: "mixin插件"
             },
-             {
+            {
+              index: "/knowledge/filterPage",
+              title: "filter过滤器"
+            },
+            {
               index: "/knowledge/vueRouter",
               title: "vue路由"
             },
