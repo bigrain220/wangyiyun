@@ -1,6 +1,6 @@
 <template>
   <div id="sidebar">
-    <el-menu class="sidebar-el-menu" router :defaultOpeneds="['one','two']" :default-active="onRoutes" :collapse="isCollapse" background-color="#fff" text-color="#434444" active-text-color="#29e">
+    <el-menu class="sidebar-el-menu" router :default-active="onRoutes" :collapse="isCollapse" background-color="#fff" text-color="#434444" active-text-color="#29e">
       <template v-for="item in items">
         <template v-if="item.subs">
           <el-submenu :index="item.index" :key="item.index">
@@ -74,6 +74,17 @@ export default {
             {
               index: "/tableview/tablePage",
               title: "表格模板"
+            },
+          ]
+        },
+         {
+          icon: "el-icon-s-promotion",
+          index: "three",
+          title: "组件相关",
+          subs: [
+            {
+              index: "/components/index",
+              title: "首页"
             },
           ]
         }

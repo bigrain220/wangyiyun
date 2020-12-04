@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-
+import componentsArr from "./components.js"
 
 Vue.use(VueRouter)
 
@@ -55,8 +55,8 @@ const routes = [{
       name: 'tablePage',
       component: () => import('@/views/tableview/tablePage.vue'),
     }]
-
-  }
+  },
+  ...componentsArr
 ]
 //解决重复点击路由报警告的问题
 const originalPush = VueRouter.prototype.push
