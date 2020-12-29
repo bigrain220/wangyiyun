@@ -1,12 +1,20 @@
 let myMixin = {
-    created: function () {
-      this.hello()
-    },
-    methods: {
-      hello: function () {
-        console.log('hello from mixin!')
-      }
+  data () {
+    return {
+      message: 'hello',
+      foo: 'abc'
+    }
+  },
+  created: function () {
+    this.hello()
+  },
+  methods: {
+    hello: function () {
+      console.log('hello from mixin!')
     }
   }
+}
 
-  export {myMixin}
+export {
+  myMixin
+}

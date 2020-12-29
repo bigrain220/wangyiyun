@@ -77,14 +77,18 @@ export default {
             },
           ]
         },
-         {
+        {
           icon: "el-icon-s-promotion",
           index: "three",
           title: "组件相关",
           subs: [
             {
               index: "/components/index",
-              title: "首页"
+              title: "组件传值"
+            },
+            {
+              index: "/components/self_multiInput",
+              title: "input多选"
             },
           ]
         }

@@ -23,7 +23,8 @@ export default {
     }
   },
   mounted() {
-    this.$myMethod(666)
+    this.$myMethod(666);
+    console.log(this.message)
   },
 }
 </script>
