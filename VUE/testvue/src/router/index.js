@@ -50,11 +50,18 @@ const routes = [{
   {
     path: '/tableview',
     component: resolve => require(['@/pages/home'], resolve),
-    children: [{
+    children: [
+      {
       path: 'tablePage',
       name: 'tablePage',
       component: () => import('@/views/tableview/tablePage.vue'),
-    }]
+    },
+    {
+      path: 'tableTempete',
+      name: 'tableTempete',
+      component: () => import('@/views/tableview/tableTempete.vue'),
+    }
+  ]
   },
   ...componentsArr
 ]

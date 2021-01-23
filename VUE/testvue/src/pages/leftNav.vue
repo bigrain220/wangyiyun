@@ -73,6 +73,10 @@ export default {
           subs: [
             {
               index: "/tableview/tablePage",
+              title: "表格操作模板"
+            },
+             {
+              index: "/tableview/tableTempete",
               title: "表格模板"
             },
           ]
@@ -89,6 +93,10 @@ export default {
             {
               index: "/components/self_multiInput",
               title: "input多选"
+            },
+             {
+              index: "/components/self_tableInput",
+              title: "表格选择器"
             },
           ]
         }

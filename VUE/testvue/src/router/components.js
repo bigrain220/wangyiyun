@@ -11,6 +11,11 @@ const arr = [{
             name: 'self_multiInput',
             component: () => import('@/views/components/slef_multiInput.vue'),
         },
+        {
+            path: 'self_tableInput',
+            name: 'self_tableInput',
+            component: () => import('@/views/components/slef_tableInput.vue'),
+        },
     ]
 }, ]
 export default arr;

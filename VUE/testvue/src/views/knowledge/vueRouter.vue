@@ -123,7 +123,7 @@ export default {
           _this.$router.push('directivesPage');
         },
         three() {
-          _this.$router.push({ path: 'home' });
+          _this.$router.push({ path: '/home' });
         },
         four() {
           _this.$router.push({ name: 'directivesPage', params: { userId: 666 } });
