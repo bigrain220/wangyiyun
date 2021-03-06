@@ -98,6 +98,10 @@ export default {
               index: "/components/self_tableInput",
               title: "表格选择器"
             },
+             {
+              index: "/components/self_upload",
+              title: "上传组件"
+            },
           ]
         }
       ]
