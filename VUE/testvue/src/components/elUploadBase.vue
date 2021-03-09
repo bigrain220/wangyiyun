@@ -81,13 +81,14 @@ export default {
     },
     uploadAction() {
       // 做校验
+      // this.uploadParams.test = [{ data: 1 }, { data: 2 }];
       // const validData = this.validParams(this.uploadParams);
       // 不做校验
       const validData = this.uploadParams;
       let params = new FormData();
       for (const key in validData) {
-          const element = validData[key];
-          params.append(key, element);
+        const element = validData[key];
+        params.append(key, element);
       }
       if (this.fileList.length > 0) {
         this.fileList.map(item => {
@@ -95,32 +96,42 @@ export default {
         });
       }
       axios
-        .post(this.uploadProps.url, params,{ timeout: 20000 }, {
+        .post(this.uploadProps.url, params, { timeout: 20000 }, {
           headers: { "Content-Type": "multipart/form-data" }
         })
         .then(res => {
           console.log(res, "666");
         });
     },
-    //属性校验 把空的属性删除，数组转字符串
+    //属性校验
     validParams(formData) {
       let params = Object.assign({}, formData);
       for (const key in params) {
-        // if (params.hasOwnProperty(key)) {
-          const element = params[key];
-          if (!element || element.length == 0) {
-            this.$delete(params, key);
-          } else if (Array.isArray(element)) {
-            params[key] = JSON.stringify(params[key])
-          }
-        // }
+        const element = params[key];
+        //属性值判断
+        if (element === undefined || element === "") {
+          this.$delete(params, key);
+        }
+        //数组处理
+        if (Array.isArray(element)) {
+          // 第一种：数组转字符串
+          // params[key] = JSON.stringify(params[key]);
+          //第二种：数组解析
+          element.map((item, index) => {
+            for (const ckey in item) {
+              // console.log(element[index], element[index][ckey], `${key}[${index}].${ckey}`);
+              params[`${key}[${index}].${ckey}`] = element[index][ckey];
+            }
+          })
+          this.$delete(params, key);
+        }
       }
       return params;
     }
   },
   mounted() {
-    
-   },
+
+  },
   computed: {
     isUpload() {
       return this.uploadProps.uploadSure;
