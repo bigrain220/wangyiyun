@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        //--------------------------- isArray ------------------------------
+        // isArray() 方法用于判断一个对象是否为数组。
+        // 如果对象是数组返回 true，否则返回 false。
+        Array.isArray('参数')
+
+        //--------------------------- fill ------------------------------
+        let arr = Array.of(1, 2, 3, 4);
+        // 参数1：用来填充的值
+        // 参数2：被填充的起始索引
+        // 参数3(可选)：被填充的结束索引，默认为数组末尾
+        var arr1 = arr.fill(0, 1, 2)
+        // console.log(arr,arr1); // [1, 0, 3, 4]
+        var arr2 = Array(5).fill({
+            name: "yyh",
+            sex: "man"
+        })
+        // console.log(arr2)
+    </script>
+    <script>
+        // 清空对象所有属性值
+        var obj = {
+            name: 1,
+            value: 2,
+            sex: "man"
+        };
+        Object.keys(obj).forEach(key => {
+            obj[key] = ""
+        });
+        // 两个不同的对象给相同属性赋值
+        var obj1 = {
+            name: 1,
+            value: 2,
+            sex: "man"
+        }
+        var obj2 = {
+            name: 666
+        }
+        Object.keys(obj2).forEach(key => {
+            obj2[key] = obj1[key]
+        });
+        // console.log(obj2)//{name: 1}
+    </script>
+    <script>
+        Array() // []
+        Array(3) // [, , ,]
+        Array(3, 11, 8) // [3, 11, 8]
+
+        //--------------------------- Array.of ------------------------------
+        Array.of(3, 11, 8) // [3,11,8]
+        Array.of(3) // [3]
+        Array.of(3).length // 1
+
+        //--------------------------- find ------------------------------
+        // find() 找出第一个符合条件的数组成员,如果没有则返回undefined
+        const findArr = [1, 4, -5, 10]
+        findArr.find((n) => n < 0); //-5
+        findArr.find(function (value, index, arr) {
+            return value > 9;
+        }) // 10
+
+        //--------------------------- findIndex ------------------------------
+        // findIndex() 找不到返回-1
+        const findIndexArr = [1, 4, -5, 10]
+        var a = findArr.findIndex(function (value, index, arr) {
+            return value > 9;
+        }) // 3
+        // console.log(a) //3
+
+        //--------------------------- filter ------------------------------
+        //不是es6的filter方法
+        // filter() 方法创建一个新的数组，新数组中的元素是通过检查指定数组中符合条件的所有元素。
+        // 注意： filter() 不会对空数组进行检测。
+        // 注意： filter() 不会改变原始数组。
+        const arr3 = [1, 2, 3]
+        arr3.filter(x => x > 2) //[3]
+
+        //--------------------------- includes ------------------------------
+        //includes() 方法用来判断一个数组是否包含一个指定的值，如果是返回 true，否则false
+        let site = ['runoob', 'google', 'taobao'];
+        site.includes('runoob'); // true 
+        site.includes('baidu'); // false
+        //语法
+        arr3.includes(searchElement)
+        arr3.includes(searchElement, fromIndex)
+    </script>
+    <script>
+        //--------------------------- reduce ------------------------------
+        // reduce() 方法接收一个函数作为累加器，数组中的每个值（从左到右）开始缩减，最终计算为一个值。
+        // reduce() 可以作为一个高阶函数，用于函数的 compose。
+        // 注意: reduce() 对于空数组是不会执行回调函数的。
+        const numbers = [1, 2, 3, 4];
+
+        function getSum(total, num) {
+            return total + num;
+        }
+
+        function myFunction(item) {
+            console.log(numbers.reduce(getSum));
+        }
+        myFunction(); //10
+
+        //--------------------------- every ------------------------------
+        // every() 方法用于检测数组所有元素是否都符合指定条件（通过函数提供）。
+        // every() 方法使用指定函数检测数组中的所有元素：
+        // 如果数组中检测到有一个元素不满足，则整个表达式返回 false ，且剩余的元素不会再进行检测。
+        // 如果所有元素都满足条件，则返回 true。
+        // 注意： every() 不会对空数组进行检测。
+        // 注意： every() 不会改变原始数组。
+
+        // 检测数组 ages 的所有元素是否都大于等于 18 :
+        var ages = [32, 33, 16, 40];
+
+        function checkAdult(age) {
+            return age >= 18;
+        }
+
+        function myFunction() {
+            console.log(ages.every(checkAdult));
+        }
+        myFunction(); //false
+        // el-table表尾合计行使用例子
+        function getSummaries(param) {
+            const {
+                columns,
+                data
+            } = param;
+            const sums = [];
+            columns.forEach((column, index) => {
+                if (index === 0) {
+                    sums[index] = '总价';
+                    return;
+                }
+                //返回相同property的组成的数组
+                const values = data.map(item => Number(item[column.property]));
+                //every 判断是否存在非数字
+                if (!values.every(value => isNaN(value))) {
+                    //reduce求和
+                    sums[index] = values.reduce((prev, curr) => {
+                        const value = Number(curr);
+                        if (!isNaN(value)) {
+                            return prev + curr;
+                        } else {
+                            return prev;
+                        }
+                    }, 0);
+                    sums[index] += ' 元';
+                } else {
+                    sums[index] = 'N/A';
+                }
+            });
+
+            return sums;
+        }
+    </script>
+</body>
+
+</html>

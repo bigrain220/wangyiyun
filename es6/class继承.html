@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        class Student {
+            constructor(name) {
+                this.name = name;
+            }
+
+            hello() {
+                console.log('Hello, ' + this.name + '!');
+            }
+        }
+        var xiaoming1 = new Student('小明');
+        
+        //xiaoming1.hello();      
+        //Hello, 小明!
+
+        class PrimaryStudent extends Student {
+            constructor(name, grade) {
+                super(name); // 记得用super调用父类的构造方法!
+                this.grade = grade || 1;
+            }
+
+            myGrade() {
+                console.log('I am at grade ' + this.grade);
+            }
+        }
+        var xiaoming2 = new PrimaryStudent('xiaoming', '666');
+        // xiaoming2.myGrade();
+    </script>
+    <script>
+        class Animal {
+            constructor(name) {
+                this.name = name;
+            }
+        }
+        class Cat extends Animal {
+            constructor(name, grade) {
+                super(name); // 记得用super调用父类的构造方法!
+            }
+
+            say() {
+                return 'Hello,' + this.name + "!";
+            }
+        }
+        // 测试:
+        var kitty = new Cat('Kitty');
+        var doraemon = new Cat('哆啦A梦');
+        if ((new Cat('x') instanceof Animal) && kitty && kitty.name === 'Kitty' && kitty.say && typeof kitty.say ===
+            'function' && kitty.say() === 'Hello,Kitty!' && kitty.say === doraemon.say) {
+            console.log('测试通过!');
+        } else {
+            console.log('测试失败!');
+        }
+    </script>
+</body>
+
+</html>

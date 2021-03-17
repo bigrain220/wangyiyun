@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        //状态模式主要用来处理过多的ifelse情况，利用变量处理函数
+        function run() {
+            console.log("i am going to run!")
+        };
+
+        function jump() {
+            console.log("wolud you mind to jump?")
+        }
+
+        function walking() {
+            console.log("let's walking.")
+        }
+
+        function superMary(action) {
+            if (action == 'run') {
+                run();
+            } else if (action == 'jump') {
+                jump();
+            } else if (action == 'walking') {
+                walking()
+            } else {
+                console.log('组合:' + [...arguments])
+            }
+        }
+        // superMary('walking');
+        // superMary(['jump', 'run']);
+    </script>
+    <script>
+        function superMary(action) {
+            this.state = [];
+            this.actions = {
+                run: function () {
+                    console.log("i am going to run!")
+                },
+                jump: function () {
+                    console.log("wolud you mind to jump?")
+                },
+                walking: function () {
+                    console.log("let's walking.")
+                }
+            }
+        };
+        superMary.prototype.putAction = function (action) {
+            if (typeof action === 'string') {
+                this.state.push(action);
+            } else {
+                this.state = [...this.state, ...action]
+            }
+        }
+        superMary.prototype.go = function () {
+            this.state.forEach((item, index) => {
+                this.actions[item]();
+            })
+        }
+        var mary = new superMary;
+        mary.putAction('jump');
+        mary.putAction('walking');
+        mary.putAction(['jump', 'run']);
+        mary.go();
+    </script>
+</body>
+
+</html>

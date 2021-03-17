@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+</head>
+
+<body>
+    <script>
+        //  function mypromise() {
+        //     return new Promise((resolve, reject) => {
+        //        $.ajax({
+        //            type: "GET",
+        //            url: "https://apilightmv.aoscdn.com/api/themes/",
+        //            success: function (res) {
+        //                console.log(res)
+        //             var arr=res.data.list;
+        //                 resolve(arr); 
+        //            }
+        //        });
+
+        //     })
+
+        // }
+        // mypromise().then(res=>{
+        //     console.log('成功：' + res);
+        // }).catch(err=>{
+        //     console.log(err)
+        // });
+    </script>
+    <script>
+        axios.defaults.baseURL = 'https://apilightmv.aoscdn.com';
+        const API = function(params){
+            return  axios.get('/api/themes/', {})
+                   .then(function (response) {
+                      console.log(response.data)
+                      return response.data
+                   })
+                    .catch(function (error) {
+                        console.log(error);
+                    });
+        }
+        API().then(rs=>{
+            console.log('data',rs)
+        })
+
+    // 箭头函数简写：
+    // const API = params => {
+	// return axios.get('/userlanguage/list',{}).then(rs => rs.data);
+    // }
+    // API().then(rs=>{
+    //         console.log('data',rs)
+    // })
+
+    </script>
+</body>
+
+</html>

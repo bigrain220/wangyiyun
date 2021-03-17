@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+</head>
+
+<body>
+    <script>
+        function timeout(ms) {
+            return new Promise(resolve => {
+                setTimeout(resolve, ms);
+            });
+        }
+
+        async function asyncPrint(value, ms) {
+            await timeout(ms);
+            console.log(value);
+        }
+
+        asyncPrint('hello world', 3000);
+    </script>
+    <script>
+        function mypromise() {
+            return new Promise((resolve, reject) => {
+                $.ajax({
+                    type: "GET",
+                    url: "https://apilightmv.aoscdn.com/api/themes/",
+                    success: function (res) {
+                        console.log(res)
+                        var arr = res.data.list;
+                        resolve(arr);
+                    }
+                });
+
+            })
+
+        }
+        async function getData() {
+            var data = await mypromise();
+            console.log(data, '2')
+        }
+        getData();
+    </script>
+</body>
+
+</html>

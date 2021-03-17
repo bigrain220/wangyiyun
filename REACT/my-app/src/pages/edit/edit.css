@@ -1,0 +1,19 @@
+/* .edit-form{
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+} */
+.edit-form .item{
+ display: flex;
+ margin: 10px 0;
+}
+.edit-form .item .label{
+    width: 100px;
+}
+.edit-form .item .ant-input{
+    flex:1
+}
+.edit-modal .ant-modal-footer{
+    text-align: center;
+    padding: 20px 0;
+}

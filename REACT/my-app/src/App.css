@@ -1,0 +1,10 @@
+@import '~antd/dist/antd.css';
+
+.tabs{
+    display: flex;
+    justify-content: center;
+    height: 50px;
+    line-height: 50px;
+    width: 100%;
+}
+.tabs .tab{margin: 0 20px;}

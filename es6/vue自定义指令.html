@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.min.js"></script>
+
+
+
+<body>
+    <div id="app">
+        <div>
+            1. 可以通过实例(app)来修改msg的值：<span>{{msg}}</span>
+        </div>
+        <div>
+            2. 页面初始化时自动聚焦：<input type="text" v-focus>
+        </div>
+        <div>
+            <span>3. 通过判断key是否存在于指定数组中控制渲染与否：</span>
+            <button v-display-key="{ key: '1' }">1</button>
+            <button v-display-key="{ key: '11' }">11</button>
+        </div>
+        <div>4. 在图片资源还没加载出来时，先显示默认背景图，当图片资源真正加载出来了之后，再把真实图片放置到对应的位置上并显示出来。</div>
+        <div class="img-box">
+            <div v-for="item in imageList">
+                <img src="" alt="默认图" v-image="item.url">
+            </div>
+        </div>
+    </div>
+    <script>
+        // // 注册一个全局自定义指令 `v-focus`
+        // Vue.directive('focus', {
+        //     // 当被绑定的元素插入到 DOM 中时……
+        //     inserted: function (el) {
+        //         el.focus()
+        //     }
+        // })
+        let that;
+        var app = new Vue({
+            el: '#app',
+            data() {
+                return {
+                    msg: '666',
+                    imageList: [{
+                            url: "http://consumer-img.huawei.com/content/dam/huawei-cbg-site/greate-china/cn/mkt/homepage/section4/home-s4-p10-plus.jpg"
+                        },
+                        {
+                            url: "http://consumer-img.huawei.com/content/dam/huawei-cbg-site/greate-china/cn/mkt/homepage/section4/home-s4-watch2-pro-banner.jpg"
+                        },
+                        {
+                            url: "http://consumer-img.huawei.com/content/dam/huawei-cbg-site/en/mkt/homepage/section4/home-s4-matebook-x.jpg"
+                        }
+                    ]
+                };
+            },
+            directives: {
+                'focus': {
+                    // 指令的定义
+                    inserted: function (el, binding) {
+                        // console.log(el, binding)
+                        el.focus()
+                    }
+                },
+                'display-key': {
+                    inserted: function (el, binding) {
+                        console.log(el, binding)
+                        let displayKey = binding.value;
+                        if (displayKey) {
+                            let hs = that.checkArray(displayKey.key);
+                            if (!hs) {
+                                el.parentNode && el.parentNode.removeChild(el);
+                            }
+                        } else {
+                            //抛出异常
+                            throw new Error(`Need Key! can't read the value of v-display-key!`);
+                        }
+
+                    }
+                },
+                "image": {
+                    inserted: function (el, binding) {
+                        //为了真实体现效果，用了延时操作
+                        setTimeout(function () {
+                            el.setAttribute("src", binding.value);
+                        }, Math.random() * 1200)
+                    }
+                }
+            },
+            methods: {
+                checkArray(key) {
+                    let arr = ['1', '2', '3', 'demo'];
+                    let index = arr.indexOf(key);
+                    if (index > -1) {
+                        return true;
+                    } else {
+                        return false;
+                    }
+                },
+            },
+            created() {
+                that = this;
+            }
+
+
+        })
+    </script>
+    <style>
+        button {
+            width: 50px;
+            height: 30px;
+        }
+
+        div {
+            margin: 20px 0;
+        }
+
+        .img-box {
+            display: flex;
+            justify-content: space-around;
+        }
+
+        .img-box>div {
+            width: 30%;
+        }
+
+        img {
+            /* 自适应图片 */
+            width: 100%;
+            height: auto;
+        }
+    </style>
+</body>
+
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <input type="text">
+    <div class="dom"></div>
+    <script>
+        //装饰者模式
+        //不修改原代码的情况下新增功能
+        function oldfunction() {
+            console.log('old-function');
+        }
+        var old = oldfunction;
+        oldfunction = function () {
+            old();
+            console.log('add-function');
+        }
+    // oldfunction();
+    </script>
+    <script>
+            // (function () {
+            //     var $input = document.querySelector('input');
+            //     var $dom = document.querySelector('.dom')
+            //     $input.addEventListener('input', function () {
+            //         $dom.innerHTML = $input.value;
+            //     })
+            // }())
+    </script>
+
+</body>
+
+</html>
