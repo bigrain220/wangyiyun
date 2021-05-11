@@ -15,6 +15,24 @@
         border:1px solid red;
         z-index:9999;
         background: #666;`" v-drag>测试拖拽</div>
+    <div :style="`position: absolute;left:${sLeft}px;
+        top: ${sTop}px;
+        width: 200px;
+        height: 200px;
+        background:#eee;
+        z-index:9999;`" ref="dragBox" ondragstart="return false">
+      <div class="title">
+        <div id="shipinfoTitle">
+          <div>
+            <div>
+              <p style="position:absolute;line-height:40px;"><span>this is title</span></p>
+            </div>
+          </div>
+          <div style="height:40px;cursor:move;" @mousedown="move1(...arguments,'dragBox')"></div>
+        </div>
+      </div>
+      <div style="position:relative;height:160px;overflow:hidden;background: #999;">测试拖拽 {{sLeft}} / {{sTop}}</div>
+    </div>
   </div>
 </template>
 
@@ -24,6 +42,8 @@ export default {
     return {
       left: 100,
       top: 100,
+      sLeft: 500,
+      sTop: 100
     }
   },
   methods: {
@@ -60,6 +80,39 @@ export default {
         this.top = 100;
         this.left = 100;
       }
+    },
+    move1(e, ref) {
+      let disX = e.layerX;
+      let disY = e.layerY;
+      const refW = this.$refs[ref].offsetWidth;
+      const refH = this.$refs[ref].offsetHeight;
+      document.onmousemove = (e) => {
+        //用鼠标的位置减去鼠标相对元素的位置，得到元素的位置
+        let left = e.clientX - disX;
+        let top = e.clientY - disY;
+        //临界值判断
+        if (left < 0) {
+          left = 0
+        } else if (left > document.documentElement.clientWidth - refW) {
+          left = document.documentElement.clientWidth - refW;
+        }
+        if (top < 0) {
+          top = 0
+        } else if (top > document.documentElement.clientHeight - refH) {
+          top = document.documentElement.clientHeight - refH;
+        }
+        this.sTop = top;
+        this.sLeft = left;
+      };
+      document.onmouseup = () => {
+        document.onmousemove = null;
+        document.onmouseup = null;
+      };
+      window.onresize = () => {
+        this.sTop = 100;
+        this.sLeft = 500;
+      }
+
     }
   },
   directives: {
@@ -84,5 +137,8 @@ export default {
 }
 </script>
 
-<style>
+<style lang="scss" scoped>
+.title {
+  background-color: #2770d4;
+}
 </style>
