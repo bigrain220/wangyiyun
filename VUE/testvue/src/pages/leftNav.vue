@@ -75,7 +75,7 @@ export default {
               index: "/tableview/tablePage",
               title: "表格操作模板"
             },
-             {
+            {
               index: "/tableview/tableTempete",
               title: "表格模板"
             },
@@ -94,13 +94,17 @@ export default {
               index: "/components/self_multiInput",
               title: "input多选"
             },
-             {
+            {
               index: "/components/self_tableInput",
               title: "表格选择器"
             },
-             {
+            {
               index: "/components/self_upload",
               title: "上传组件"
+            },
+            {
+              index: "/drag",
+              title: "拖拽组件"
             },
           ]
         }

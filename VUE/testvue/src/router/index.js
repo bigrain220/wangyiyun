@@ -63,7 +63,11 @@ const routes = [{
     }
   ]
   },
-  ...componentsArr
+  ...componentsArr,
+  {
+    path: '/drag',
+    component: () => import('@/views/drag.vue'),
+  },
 ]
 //解决重复点击路由报警告的问题
 const originalPush = VueRouter.prototype.push
