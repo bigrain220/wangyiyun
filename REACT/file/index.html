@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
+</head>
+<body>
+    <div id="like_button_container"></div>
+    <!-- <script src="./btn.js"></script> -->
+    <script>
+        class Welcome extends React.Component{
+            constructor(props){
+                super(props);
+            }
+            render(){
+                return React.createElement(
+                    'h1',
+                    null,
+                    'hello',React.createElement('h6',null,this.props.toWhat)
+                );
+            }
+        }
+        console.log(React.createElement(
+                    'h1',
+                    null,
+                    'hello',React.createElement('h6',null,'world')
+                ));
+        ReactDOM.render(
+            React.createElement(Welcome,{toWhat:'world'}),
+            document.getElementById('like_button_container')
+        );
+    </script>
+</body>
+</html>

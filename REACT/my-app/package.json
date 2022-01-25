@@ -4,10 +4,10 @@
   "homepage": "./",
   "private": true,
   "dependencies": {
-    "antd": "^3.26.17",
-    "react": "^16.13.1",
-    "react-dom": "^16.13.1",
-    "react-router-dom": "^5.2.0",
+    "antd": "^3.26.20",
+    "react": "^16.14.0",
+    "react-dom": "^16.14.0",
+    "react-router-dom": "^5.3.0",
     "react-scripts": "3.2.0"
   },
   "scripts": {
