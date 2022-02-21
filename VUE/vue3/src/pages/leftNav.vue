@@ -92,7 +92,7 @@ export default {
           ]
         },
         {
-          icon: "Refrigerators-promotion",
+          icon: "Grid",
           index: "three",
           title: "组件相关",
           subs: [
