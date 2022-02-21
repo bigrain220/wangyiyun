@@ -1,6 +1,6 @@
 import { createStore } from "vuex";
 
-const store = createStore({
+const a = {
   state() {
     return {
       isCollapse: false,
@@ -20,6 +20,12 @@ const store = createStore({
     collapseAction(context, params) {
       context.commit("setCollapse", params);
     },
+  },
+}
+
+const store = createStore({
+  modules: {
+    a
   },
 });
 

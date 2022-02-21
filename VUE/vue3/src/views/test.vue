@@ -17,11 +17,13 @@
 
     <div>{{isCollapse}}</div>
     <el-button @click="change">change</el-button>
+    
   </div>
 </template>
 
 <script>
-import { computed } from 'vue'
+
+import { computed, onMounted } from 'vue'
 import { useStore } from 'vuex'
 import { ref } from 'vue'
 export default{
@@ -45,6 +47,10 @@ export default{
     }
     const isCollapse= computed(() => store.state.isCollapse);
     const change = () => store.commit('setCollapse',!isCollapse.value);
+    onMounted(()=>{
+      store.dispatch('collapseAction',!isCollapse.value)
+    })
+    
     return {
       isCollapse,
       currentPage,

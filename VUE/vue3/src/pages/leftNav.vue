@@ -37,7 +37,6 @@
 
 <script>
 // el-submenu改成了el-sub-menu
-
 import { computed, reactive } from "vue"
 import { useStore } from 'vuex'
 
@@ -125,7 +124,7 @@ export default {
     const isCollapse = computed(() => store.state.isCollapse)
     return {
       items,
-      isCollapse
+      isCollapse,
     }
   }
 }
