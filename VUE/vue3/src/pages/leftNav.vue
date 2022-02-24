@@ -121,7 +121,7 @@ export default {
       ]
     )
     const store = useStore();
-    const isCollapse = computed(() => store.state.isCollapse)
+    const isCollapse = computed(() => store.state.isCollapse);
     return {
       items,
       isCollapse,
@@ -179,5 +179,9 @@ ul.el-menu--popup {
 .el-submenu__title:hover,
 ul.el-menu--popup li:hover {
   background: #ecf5ff !important;
+}
+/* 解决默认min-width的样式 */
+.el-sub-menu .el-menu-item{
+  min-width: 0 !important;;
 }
 </style>
