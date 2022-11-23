@@ -1,5 +1,7 @@
 <template>
   <div>
+    <h6>请打开network查看网络请求</h6>
+    <el-divider></el-divider>
     <el-row>
       <el-col :span="4">
         <el-upload-base :uploadProps="uploadProps" :uploadParams="uploadParams"></el-upload-base>
@@ -18,6 +20,16 @@
       </el-col>
     </el-row>
     <el-divider></el-divider>
+    <el-row>
+      <el-col :span="4">
+        <el-image-upload accept=".png" :width-pieces="[{lte:42,gte:42}]" :height-pieces="[{lte:42,gte:42}]" widthHeightErrMsg="请选择 42×42 的png图片" @success="alert(1)">
+          <div slot="tip">请选择42×42的png图片</div>
+        </el-image-upload>
+      </el-col>
+      <el-col :span="2">
+
+      </el-col>
+    </el-row>
   </div>
 </template>
 
@@ -26,8 +38,9 @@ export default {
   components: {
     elUploadBase: () => import("@/components/elUploadBase"),
     elUploadSingle: () => import("@/components/elUploadSingle"),
+    elImageUpload: () => import("@/components/upload/image-upload"),
   },
-  data() {
+  data () {
     return {
       uploadProps: {
         uploadSure: false,

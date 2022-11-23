@@ -4,7 +4,7 @@
     <br>
     <el-row :span="24">
       <el-col :span="6">
-        <arrary-input v-model="data" placeholder="请输入内容"></arrary-input>
+        <array-input v-model="data" placeholder="请输入内容"></array-input>
       </el-col>
     </el-row>
   </div>
@@ -13,7 +13,7 @@
 <script>
 export default {
   components: {
-    arraryInput: () => import("@/components/arraryInput")
+    arrayInput: () => import("@/components/arrayInput")
   },
   data() {
     return {
