@@ -1,16 +1,18 @@
 <template>
   <div class="upload-box">
     <div class="upload-img">
-      <div class="upload-icon">
-        <slot name="icon">
-          <!-- 这里可以换成一个图标 -->
-          +
-        </slot>
-      </div>
-      <div class="upload-text">
-        <slot name="tip">
-          <span>点击选择图标</span>
-        </slot>
+      <div>
+        <div class="upload-icon">
+          <slot name="icon">
+            <!-- 这里可以换成一个图标 -->
+            +
+          </slot>
+        </div>
+        <div class="upload-text">
+          <slot name="tip">
+            <span>点击选择图标</span>
+          </slot>
+        </div>
       </div>
       <input type="file" name="file" :accept="accept" @change="handleChange" ref="fileInputRef" class="upload-input" title="">
       <img :src="imageSrc" alt="" v-show="fileList.length" class="upload-preview-img" ref="imgRef">
@@ -172,6 +174,7 @@ export default {
         // 文件上传进度，单位：字节
         onUploadProgress: (uploadInfo, totalSize, progress) => {
           this.progress = Math.ceil(progress * 100)
+          this.$emit('onProgress', this.progress)
         },
         // 文件上传成功
         onUploadSucceed: (uploadInfo) => {
@@ -196,7 +199,7 @@ export default {
     width: 100%;
     height: 100%;
     display: flex;
-    flex-direction: column;
+    align-items: center;
     transition: border-color 0.3s ease;
     background-color: #fbfbfb;
     border: 1px dashed #d9d9d9;
@@ -207,9 +210,6 @@ export default {
     &:hover {
       border-color: #409eff;
     }
-  }
-  .upload-icon {
-    margin-top: 40px;
   }
   .upload-text {
     font-size: 12px;
@@ -227,6 +227,8 @@ export default {
   .upload-preview-img {
     position: absolute;
     width: 100%;
+    height: 100%;
+    background-color: #fbfbfb;
     z-index: 8;
     top: 0;
     left: 0;
