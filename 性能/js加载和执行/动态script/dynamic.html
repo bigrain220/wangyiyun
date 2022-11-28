@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      //  封装函数监听脚本加载完成时的状态
+      const loadScript = (url, callback) => {
+        var head = document.getElementsByTagName('head')[0]
+        var script = document.createElement('script')
+        script.type = 'text/javascript'
+        //IE
+        if (script.readyState) {
+          script.onreadystatechange = function () {
+            if (this.readyState === 'loaded' || this.readyState === 'complete') {
+              script.onreadystatechange = null
+              callback()
+            }
+          }
+          //其它浏览器
+        } else {
+          script.onload = function () {
+            callback()
+          }
+        }
+        script.src = url
+        head.appendChild(script)
+      }
+    </script>
+    <script>
+      // loadScript('./dynamic.js', function () {
+      //   alert('script加载完成')
+      // })
+
+      // 按顺序下载
+      loadScript('./dynamic.js', function () {
+        loadScript('./dynamic1.js', function () {
+          loadScript('./dynamic2.js', function () {
+            alert('所有script按顺序加载完成')
+          })
+        })
+      })
+    </script>
+  </body>
+</html>

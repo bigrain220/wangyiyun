@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- defer属性表示脚本在执行的时候不会改变页面的结构，也就是说脚本会被延迟到整个页面都解析运行完毕后再运行。
+    因此，在script标签设置defer属性，相当于告诉浏览器立即下载，但延迟执行。 -->
+    
+    <!-- 注意，defer属性只对外部脚本文件有效，IE7及更早版本中对行内脚本也可指定此属性 -->
+    <script defer src="./defer.js">
+    </script>
+    <script>
+        alert('script');
+    </script>
+    <script>
+        window.onload=function(){
+            alert('load');
+        }
+    </script>
+</body>
+</html>

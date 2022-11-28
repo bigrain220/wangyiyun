@@ -1,7 +1,7 @@
 <template>
   <div class="upload-box">
     <div class="upload-img">
-      <div>
+      <div style="width:100%">
         <div class="upload-icon">
           <slot name="icon">
             <!-- 这里可以换成一个图标 -->
