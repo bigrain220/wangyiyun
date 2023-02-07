@@ -1,0 +1,16 @@
+// 自动生成tsconfig文件，运行 ./node_modules/.bin/tsc --init
+
+{
+    "compilerOptions": {
+        "lib": ["es2015"], // TSC假定运行代码的环境中有哪些API? 包括ES5的function.prototype.bind、ES2015的Object.assign和DOM的document.querySelector
+        "module": "CommonJS", // TSC把代码编译成哪个模块系统(CommonJS、SystemJs、ES2015等)
+        "outDir": "dist",  // TSC把生成的js代码放在哪个文件夹中
+        "sourceMap": true,
+        "strict":true,    // 检查无效代码时尽量严格。该选项强制所有代码都正确声明了类型
+        "target":"ES2015" // TSC把代码编译成哪个js版本(ES3、ES5、ES2015、ES2016等)
+    },
+    // include：TSC在哪个文件夹中寻找TypeScript文件
+    "include": [
+        "src"
+    ]
+}
