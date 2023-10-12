@@ -1,5 +1,0 @@
-1.如果路由通过require引入会报错,换成import不会。
-  引入方式:component: (resolve) => require(["@/pages/home"], resolve))
-  报错：Cannot read properties of undefined (reading 'apply')
-
- 2.
