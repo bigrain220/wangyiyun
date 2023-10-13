@@ -78,7 +78,7 @@ watch(
 - `<input v-model.lazy="msg" />` 默认情况下，v-model 会在每次 input 事件后更新数据。你可以添加 lazy 修饰符来改为在每次 change 事件后更新数据
 - `<input v-model.number="age" />` 输入自动转换为数字,如果该值无法被 parseFloat() 处理，那么将返回原始值
 - `<input v-model.trim="msg" />` 默认自动去除用户输入内容中两端的空格
-- `v-model`在自定义组件上的使用: https://cn.vuejs.org/guide/components/v-model.html#v-model-arguments
+- `v-model`在自定义组件上的使用: https://cn.vuejs.org/guide/components/v-model.html
 
 ### _@click/v-on:click_
 
@@ -102,13 +102,35 @@ watch(
   1. 当使用 DOM 内嵌模板 (直接写在 HTML 文件里的模板) 时 只能使用 kebab-case
   2. .vue（单文件组件（SFC）） 文件中，可以使用 kebab-case 和 PascalCase
 
-- **全局注册**，但并没有被使用的组件无法在生产打包时被自动移除 (也叫“tree-shaking”)。如果你全局注册了一个组件，即使它并没有被实际使用，它仍然会出现在打包后的 JS 文件中
+- 全局注册，但并没有被使用的组件无法在生产打包时被自动移除 (也叫“tree-shaking”)。如果你全局注册了一个组件，即使它并没有被实际使用，它仍然会出现在打包后的 JS 文件中
 - `v-bind`用来响应式地绑定一个属性: `v-bind:xxx=value`简写成`:xxx=value` ;<br>
   不带参数可以绑定多个属性: `v-bind=objectOfAttrs`相当于`:attr1=objectOfAttrs.attr1 :attr2=objectOfAttrs.attr2`
 - `defineProps()` 宏中的参数不可以访问 `<script setup>` 中定义的其他变量，因为在编译时整个表达式都会被移到外部的函数中。
 - boolean 类型转换:`<MyComponent disabled />` 等同于传入 `:disabled="true"`, `<MyComponent />` 等同于传入 `:disabled="false"`
+
 - **事件(emit)**
+
   1. `<template>`里面可以直接使用 `$emit`方法触发自定义事件
   2. `<script>`里面可以显式地通过 `defineEmits()` 宏来声明它要触发的事件,`const emit = defineEmits(['inFocus', 'submit'])`。触发方式:调用函数`emit('submit')`
   3. `defineEmits()`可以对声明的事件参数做验证,通过返回一个布尔值：`defineEmits({  inFocus:null,  submit(params){ return !!params }  })`
 
+- **透传 Attributes**
+
+  1. `透传 attribute`指的是传递给一个组件，却没有被该组件声明为 props 或 emits 的 `attribute` 或者 `v-on 事件监听器`。最常见的例子就是 class、style 和 id。
+  2. 透传进来的 `attribute` 可以在`<template>`中直接用 `$attrs` 访问到
+  3. 如果不想要一个组件自动地继承 attribute，你可以使用 `defineOptions({inheritAttrs: false})`
+  4. 可以通过设定 `inheritAttrs: false` 和使用 `v-bind="$attrs"` 来实现透传 attribute 到非最外层元素上
+  5. 有着多个根节点的组件没有自动 attribute 透传行为。如果 $attrs 没有被显式绑定（`v-bind="$attrs"`），将会抛出一个运行时警告。
+
+- **插槽(slots)**
+
+  1. `<slot name='header'></slot>`显示带 `name` 的叫具名插槽; `<slot></slot>`其实就是`<slot name="default"></slot>`
+  2. `v-slot` 有对应的简写 `#`。 `v-slot:header` 可以简写为 `#header`。动态插槽名：`#[dynamicSlotName]`
+  3. 传值: `<slot name="header" :text="message" :count="1"></slot>` ,取值： `<MyComponent #header="slotProps">{{ slotProps.message }} {{ slotProps.count }}</MyComponent>`
+
+- **依赖注入(provide/inject)**
+
+1.  `provide('message', 'hello!')` 第一个参数是 注入名，第二个参数是提供的值，值可以是任意类型，包括响应式的状态(ref)
+2.  `inject('message')`, 带默认值: ` const value = inject('message', '这是默认值') `
+3.  修改 `provide()` 值的方法:` const location = ref('one'); const updateLocation=()=>{location.value = 'two'}; provide('location', {location,updateLocation})`
+4.  为了避免在用不到默认值的情况下进行不必要的计算或产生副作用，我们可以使用工厂函数来创建默认值：`const value = inject('key', () => new ExpensiveClass(), true)`
