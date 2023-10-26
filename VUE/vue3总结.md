@@ -2,6 +2,8 @@
 
 ## 基础知识
 
+- 创建 vue 项目：`npm create vue@latest`
+
 - `<div :title="toTitleDate(date)">{{formatDate(date)}}</div>`
   绑定在表达式中的方法在组件每次更新时都会被重新调用，因此不应该产生任何副作用，比如改变数据或触发异步操作。
 
@@ -55,6 +57,7 @@ watch(
 - 一个返回响应式对象的 getter 函数，只有在返回不同的对象时，才会触发回调。`watch(state.someObject, (newValue, oldValue) => {}) // 仅当 state.someObject 被替换时触发`
 - 上面的情况强制转成深层侦听器,使用 watch 函数第三个参数`{ deep: true }`。`watch(state.someObject, (newValue, oldValue) => {},{ deep: true })`
 - watch 函数第三个参数`{immediate: true}` 选项来强制侦听器的回调立即执行
+- 停止监听 `const stop = watch(() => {}); stop()`, watchEffect 等也适用
 
 ### _watchEffect()_
 
@@ -88,12 +91,6 @@ watch(
 - 在内联事件处理器中访问事件参数(原生 DOM 事件):
   1. 使用特殊的 $event 变量: `@click="fn('xxx', $event)"`
   2. 使用内联箭头函数: `@click="(event) => fn('xxx', event)"`
-
-## 路由相关
-
-- 如果路由通过 require 引入会报错,换成 import 不会。
-  引入方式:component: (resolve) => require(["@/pages/home"], resolve))
-  报错：Cannot read properties of undefined (reading 'apply')
 
 ## 组件相关
 
@@ -131,6 +128,70 @@ watch(
 - **依赖注入(provide/inject)**
 
 1.  `provide('message', 'hello!')` 第一个参数是 注入名，第二个参数是提供的值，值可以是任意类型，包括响应式的状态(ref)
-2.  `inject('message')`, 带默认值: ` const value = inject('message', '这是默认值') `
+2.  `inject('message')`, 带默认值: `const value = inject('message', '这是默认值')`
 3.  修改 `provide()` 值的方法:` const location = ref('one'); const updateLocation=()=>{location.value = 'two'}; provide('location', {location,updateLocation})`
 4.  为了避免在用不到默认值的情况下进行不必要的计算或产生副作用，我们可以使用工厂函数来创建默认值：`const value = inject('key', () => new ExpensiveClass(), true)`
+
+## 路由(router)
+
+- 如果路由通过 require 引入会报错,换成 import 不会。
+  引入方式:component: (resolve) => require(["@/pages/home"], resolve))
+  报错：Cannot read properties of undefined (reading 'apply')
+- 组合式 API `useRouter` 和 `useRoute` 函数替代了`this.$router`和`this.$route`, `import { useRouter, useRoute } from 'vue-router'`, `const router = useRouter()`, `const route = useRoute()`
+- 在`<template>`中，仍然使用`$router`和`$route`
+
+- 默认情况下，所有路由是不区分大小写的，并且能匹配带有或不带有尾部斜线的路由。例如，路由 `/users` 将匹配 `/users`、`/users/`、甚至 `/Users/`。
+
+  1. 当 `strict: true` 时，只能匹配不带有尾部斜线的路由
+  2. 当 `sensitive: true` 时，区分大小写
+  3. 当前路由上的 `strict` 或 `sensitive` 权重大于路由全局的
+
+- `transition` 和 `keep-alive` 现在必须通过` v-slot` API 在 RouterView 内部使用:
+
+```js
+<router-view v-slot="{ Component }">
+  <transition>
+    <keep-alive>
+      <component :is="Component" />
+    </keep-alive>
+  </transition>
+</router-view>
+```
+
+## 性能优化
+
+- web 应用性能的两个主要方面：**页面加载性能** 和 **更新性能**
+
+1.  减少包体积、 Tree-shaking 优化（Tree-shaking 可以移除你源代码中未使用到的模块）
+2.  代码分割（异步组件，按需加载）
+3.  虚拟列表、Props 稳定性、v-once、v-memo
+4.  使用 shallowRef()和 shallowReactive()来浅层响应而不是深度响应
+5.  组件渲染太多时，避免不必要的组件提取，而使用普通 DOM 节点
+
+### API
+
+- **app.config.globalProperties**
+
+1.  一个用于注册能够被应用内所有组件实例访问到的全局属性的对象
+2.  这是对 Vue 2 中 Vue.prototype 使用方式的一种替代
+3.  如果全局属性与组件自己的属性冲突，组件自己的属性将具有更高的优先级
+
+-`toRefs()` 和 `toRef()` 解构 props 对象，解构出的变量将会丢失响应性,可以使用 这两个工具函数来结构并保持响应性
+
+```js
+import { toRefs, toRef } from "vue";
+const props = defineProps(/* ... */);
+
+// 将 `props` 转为一个其中全是 ref 的对象，然后解构
+const { title } = toRefs(props);
+// 或者，将 `props` 的单个属性转为一个 ref
+const title = toRef(props, "title");
+// 或者(getter 语法——推荐在 3.3+ 版本使用)
+const title = toRef(() => props.title);
+// `title` 是一个追踪着 `props.title` 的 ref
+console.log(title.value);
+```
+
+- `unref()`:如果参数是 ref，则返回内部值，否则返回参数本身。这是 `val = isRef(val) ? val.value : val` 计算的一个语法糖
+
+- css 访问 js 变量 `const theme={color:'red'}`, `div {color: v-bind('theme.color')}`;
